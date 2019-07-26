@@ -71,8 +71,8 @@ function displayResults(responseJson) {
   //remove hidden &display the results section
   $("#results").removeClass("hidden");
   cityLat = `${responseJson.results[i].locations[0].displayLatLng.lat}`;
-
   cityLong = `${responseJson.results[i].locations[0].displayLatLng.lng}`;
+
 
   //////////CALL REST OF API's/////////////
   consolePrint();
@@ -89,9 +89,11 @@ function consolePrint() {
   console.log(cityLat);
   console.log(cityLong);
 }
+
 /*==============================================================
 HIKING PROJECT API - takes GPS Coordinates & returns city trails
 =============================================================== */
+
 function getHikingTrails() {
   const trailApiKey = "200533548-26ee95d93063384ab58050efb99c71e4";
 
@@ -148,6 +150,7 @@ function displayTrailResults(responseJson) {
 /*====================================================================
 WEATHER UNLOCKED API - takes GPS Coordinates, shortens to 3 decimals & returns weather forcast
 ====================================================================== */
+
 function getWeatherForecast() {
   const weatherApiKey = "81b3b90d03c810c1e29fb17d3c6c3b96";
 
@@ -197,6 +200,7 @@ function displayWeatherResults(responseJson) {
 
   for (let i = 0; i < responseJson.Days.length; i++) {
     $("#results-getWeather").append(`<li><h3>${responseJson.Days[i].date}</h3>
+
         <img src="/Images/setgif/${responseJson.Days[i].Timeframes[0].wx_icon}">
         <p>${responseJson.Days[i].Timeframes[0].wx_desc}</p>
         <p>High: ${responseJson.Days[i].temp_max_f}&#8457;</p>
@@ -387,6 +391,7 @@ $(watchForm);
 /*=========================
 CODE SNIPPET from previous News API assignment example
 ===========================
+
     <img src="${responseJson.events[i]._embedded.events.images[i].url}">
 
      <img src="${responseJson.Days[i].Timeframes[4].wx_icon}">
