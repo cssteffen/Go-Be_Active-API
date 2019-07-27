@@ -7,6 +7,7 @@ function watchForm() {
     event.preventDefault();
     /*$("#btn").click(function(){*/
     const searchTerm = $("#js-search-term").val();
+    $(".js-cityWeather").text(`${searchTerm} Weather`);
 
     getLatLon(searchTerm);
   });
@@ -69,7 +70,11 @@ function displayResults(responseJson) {
       }</p>`);
 
   //remove hidden &display the results section
-  $("#results").removeClass("hidden");
+  //$("#results").removeClass("hidden");
+  $(".Title").removeClass("hidden");
+  $(".resultsBox").removeClass("hidden");
+  $(".shareSection").removeClass("positionAbsolute");
+
   cityLat = `${responseJson.results[i].locations[0].displayLatLng.lat}`;
   cityLong = `${responseJson.results[i].locations[0].displayLatLng.lng}`;
 
@@ -81,6 +86,9 @@ function displayResults(responseJson) {
   getSports();
   getMusic();
   getPlays();
+  getMusic();
+  getPlays();
+
   ////////////////////////////////////////
 }
 
@@ -136,7 +144,7 @@ function displayTrailResults(responseJson) {
       responseJson.trails[i].url
     }"><h3>${responseJson.trails[i].name}</h3></a>
     <p>${responseJson.trails[i].summary}</p>
-  <img src= "${responseJson.trails[i].imgSmallMed}"<br>
+  <img src= "${responseJson.trails[i].imgSmallMed}" class="apiImage"<br>
       <p>${responseJson.trails[i].location} | ${
       responseJson.trails[i].length
     } mi.</p>
@@ -199,12 +207,13 @@ function displayWeatherResults(responseJson) {
   $("#results-getWeather").empty();
 
   for (let i = 0; i < responseJson.Days.length; i++) {
-    $("#results-getWeather").append(`<li><h3>${responseJson.Days[i].date}</h3>
-
-        <img src="/Images/setgif/${responseJson.Days[i].Timeframes[0].wx_icon}">
+    $("#results-getWeather").append(`<div class="days"><li><h3>${
+      responseJson.Days[i].date
+    }</h3>
+        <img src="/Images/setpng/${responseJson.Days[i].Timeframes[0].wx_icon}">
         <p>${responseJson.Days[i].Timeframes[0].wx_desc}</p>
         <p>High: ${responseJson.Days[i].temp_max_f}&#8457;</p>
-        <p>Low: ${responseJson.Days[i].temp_min_f}&#8457;</p>`);
+        <p>Low: ${responseJson.Days[i].temp_min_f}&#8457;</p></div>`);
   }
   //remove hidden &display the weather section
   $("#getWeather").removeClass("hidden");
@@ -260,7 +269,9 @@ function displaySportsResults(responseJson) {
       responseJson._embedded.events[i].url
     }" target="_blank">${responseJson._embedded.events[i].name}</a></h3>
     <p>${responseJson._embedded.events[i].dates.start.localDate}</p>
-    <img src="${responseJson._embedded.events[i].images[0].url}">`);
+    <img src="${
+      responseJson._embedded.events[i].images[0].url
+    }" class="apiImage">`);
   }
   //remove hidden & display the Sports section
   $("#getSports").removeClass("hidden");
@@ -324,9 +335,11 @@ function displayMusicResults(responseJson) {
       responseJson._embedded.events[i].url
     }" target="_blank">${responseJson._embedded.events[i].name}</a></h3>
     <p>${responseJson._embedded.events[i].dates.start.localDate}</p>
-      <img src="${responseJson._embedded.events[i].images[0].url}">`);
+      <img src="${
+        responseJson._embedded.events[i].images[0].url
+      }" class="apiImage">`);
   }
-  //remove hidden & display the Events section
+  //remove hidden & display the Sports section
   $("#getMusic").removeClass("hidden");
 }
 
@@ -380,7 +393,9 @@ function displayPlaysResults(responseJson) {
       responseJson._embedded.events[i].url
     }" target="_blank">${responseJson._embedded.events[i].name}</a></h3>
       <p>${responseJson._embedded.events[i].dates.start.localDate}</p>
-        <img src="${responseJson._embedded.events[i].images[0].url}">`);
+        <img src="${
+          responseJson._embedded.events[i].images[0].url
+        }" class="apiImage">`);
   }
   //remove hidden & display the Events section
   $("#getPlays").removeClass("hidden");
@@ -449,6 +464,6 @@ function getNews(query, maxResults=10) {
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
-}
+} 
 
 */
