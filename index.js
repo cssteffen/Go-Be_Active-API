@@ -76,8 +76,8 @@ function displayResults(responseJson) {
   $(".shareSection").removeClass("positionAbsolute");
 
   cityLat = `${responseJson.results[i].locations[0].displayLatLng.lat}`;
-
   cityLong = `${responseJson.results[i].locations[0].displayLatLng.lng}`;
+
 
   //////////CALL REST OF API's/////////////
   consolePrint();
@@ -97,9 +97,11 @@ function consolePrint() {
   console.log(cityLat);
   console.log(cityLong);
 }
+
 /*==============================================================
 HIKING PROJECT API - takes GPS Coordinates & returns city trails
 =============================================================== */
+
 function getHikingTrails() {
   const trailApiKey = "200533548-26ee95d93063384ab58050efb99c71e4";
 
@@ -156,6 +158,7 @@ function displayTrailResults(responseJson) {
 /*====================================================================
 WEATHER UNLOCKED API - takes GPS Coordinates, shortens to 3 decimals & returns weather forcast
 ====================================================================== */
+
 function getWeatherForecast() {
   const weatherApiKey = "81b3b90d03c810c1e29fb17d3c6c3b96";
 
@@ -403,6 +406,7 @@ $(watchForm);
 /*=========================
 CODE SNIPPET from previous News API assignment example
 ===========================
+
     <img src="${responseJson.events[i]._embedded.events.images[i].url}">
 
      <img src="${responseJson.Days[i].Timeframes[4].wx_icon}">
