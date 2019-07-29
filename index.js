@@ -210,9 +210,9 @@ function displayWeatherResults(responseJson) {
       responseJson.Days[i].date
     }</h3>
         <img src="https://cssteffen.github.io/Go-Be_Active-API/Images/setgif/${
-          responseJson.Days[i].Timeframes[3].wx_icon
+          responseJson.Days[i].Timeframes[1].wx_icon
         }">
-        <p>${responseJson.Days[i].Timeframes[3].wx_desc}</p>
+        <p>${responseJson.Days[i].Timeframes[1].wx_desc}</p>
         <p>High: ${responseJson.Days[i].temp_max_f}&#8457;</p>
         <p>Low: ${responseJson.Days[i].temp_min_f}&#8457;</p></div>`);
   }
