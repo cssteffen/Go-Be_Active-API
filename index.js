@@ -76,7 +76,6 @@ function displayResults(responseJson) {
   $(".shareSection").removeClass("positionAbsolute");
 
   cityLat = `${responseJson.results[i].locations[0].displayLatLng.lat}`;
-
   cityLong = `${responseJson.results[i].locations[0].displayLatLng.lng}`;
 
   //////////CALL REST OF API's/////////////
@@ -97,9 +96,11 @@ function consolePrint() {
   console.log(cityLat);
   console.log(cityLong);
 }
+
 /*==============================================================
 HIKING PROJECT API - takes GPS Coordinates & returns city trails
 =============================================================== */
+
 function getHikingTrails() {
   const trailApiKey = "200533548-26ee95d93063384ab58050efb99c71e4";
 
