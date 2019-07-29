@@ -294,9 +294,9 @@ h3 {
 }
 
 .footerText {
-  text-align: center;
+  float: right;
   margin-top: 3px;
-  padding-left: 29%;
+  padding-left: 19%;
   padding-right: 3%;
 }
 
