@@ -209,7 +209,7 @@ function displayWeatherResults(responseJson) {
     $("#results-getWeather").append(`<div class="days"><li><h3>${
       responseJson.Days[i].date
     }</h3>
-        <img src="https://cssteffen.github.io/Go-Be_Active-API/${
+        <img src="https://cssteffen.github.io/Go-Be_Active-API/Images/setgif/${
           responseJson.Days[i].Timeframes[0].wx_icon
         }">
         <p>${responseJson.Days[i].Timeframes[0].wx_desc}</p>
