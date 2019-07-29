@@ -25,7 +25,8 @@
       href="https://use.fontawesome.com/0f63d8ca7c.css"
       media="all"
     />
-
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="date.format.js"></script>
     <script src="https://use.fontawesome.com/webfontloader/1.6.24/webfontloader.js"></script>
 
     <!--======================-->
@@ -94,7 +95,9 @@
         <section id="getWeather" class="hidden">
           <h2 class="js-cityWeather">Weather</h2>
           <div class="weatherBox">
-            <ul id="results-getWeather"></ul>
+            <div class="getWeatherContainer">
+              <ul id="results-getWeather"></ul>
+            </div>
           </div>
         </section>
         <!------------------>
@@ -102,49 +105,51 @@
         <!---========= RESULTS ==========----->
 
         <div class="resultBox">
-          <!--TRAILS SECTION-->
-          <section id="getTrails" class="hidden">
-            <div class="sectionBox">
-              <div class="Title hidden">
-                <h2>Trails</h2>
+          <div class="resultBox-innerContainer">
+            <!--TRAILS SECTION-->
+            <section id="getTrails" class="hidden">
+              <div class="sectionBox">
+                <div class="Title hidden">
+                  <h2>Trails</h2>
+                </div>
+                <ul id="results-getTrails" class="result"></ul>
               </div>
-              <ul id="results-getTrails" class="result"></ul>
-            </div>
-          </section>
-          <!------------------->
+            </section>
+            <!------------------->
 
-          <!--SPORTS SECTION-->
-          <section id="getSports" class="hidden">
-            <div class="sectionBox">
-              <div class="Title hidden">
-                <h2>Sports</h2>
+            <!--SPORTS SECTION-->
+            <section id="getSports" class="hidden">
+              <div class="sectionBox">
+                <div class="Title hidden">
+                  <h2>Sports</h2>
+                </div>
+                <ul id="results-getSports" class="result"></ul>
               </div>
-              <ul id="results-getSports" class="result"></ul>
-            </div>
-          </section>
-          <!------------------>
+            </section>
+            <!------------------>
 
-          <!--CONCERT SECTION-->
-          <section id="getMusic" class="hidden">
-            <div class="sectionBox">
-              <div class="Title hidden">
-                <h2>Music</h2>
+            <!--CONCERT SECTION-->
+            <section id="getMusic" class="hidden">
+              <div class="sectionBox">
+                <div class="Title hidden">
+                  <h2>Music</h2>
+                </div>
+                <ul id="results-getMusic" class="result"></ul>
               </div>
-              <ul id="results-getMusic" class="result"></ul>
-            </div>
-          </section>
-          <!------------------>
+            </section>
+            <!------------------>
 
-          <!--PLAYS SECTION-->
-          <section id="getPlays" class="hidden">
-            <div class="sectionBox">
-              <div class="Title hidden">
-                <h2>Theatre</h2>
+            <!--PLAYS SECTION-->
+            <section id="getPlays" class="hidden">
+              <div class="sectionBox">
+                <div class="Title hidden">
+                  <h2>Theatre</h2>
+                </div>
+                <ul id="results-getPlays" class="result"></ul>
               </div>
-              <ul id="results-getPlays" class="result"></ul>
-            </div>
-          </section>
-          <!------------------>
+            </section>
+            <!------------------>
+          </div>
         </div>
       </div>
 

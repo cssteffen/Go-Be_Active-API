@@ -139,9 +139,9 @@ function displayTrailResults(responseJson) {
   $("#results-getTrails").empty();
 
   for (let i = 0; i < responseJson.trails.length; i++) {
-    $("#results-getTrails").append(`<li><a href= "${
+    $("#results-getTrails").append(`<li class="unit"><a href= "${
       responseJson.trails[i].url
-    }"><h3>${responseJson.trails[i].name}</h3></a>
+    }" target="_blank"><h3>${responseJson.trails[i].name}</h3></a>
     <p>${responseJson.trails[i].summary}</p>
   <img src= "${responseJson.trails[i].imgSmallMed}" class="apiImage"<br>
       <p>${responseJson.trails[i].location} | ${
@@ -206,15 +206,13 @@ function displayWeatherResults(responseJson) {
   $("#results-getWeather").empty();
 
   for (let i = 0; i < responseJson.Days.length; i++) {
-    $("#results-getWeather").append(`<div class="days"><li><h3>${
-      responseJson.Days[i].date
-    }</h3>
+    $("#results-getWeather").append(`<div class="days"><li>
         <img src="https://cssteffen.github.io/Go-Be_Active-API/Images/setgif/${
           responseJson.Days[i].Timeframes[1].wx_icon
-        }">
-        <p>${responseJson.Days[i].Timeframes[1].wx_desc}</p>
-        <p>High: ${responseJson.Days[i].temp_max_f}&#8457;</p>
-        <p>Low: ${responseJson.Days[i].temp_min_f}&#8457;</p></div>`);
+        }"><h4>${responseJson.Days[i].date}</h4>
+        <p>${responseJson.Days[i].Timeframes[1].wx_desc}<br>High: ${
+      responseJson.Days[i].temp_max_f
+    }&#8457;<br>Low: ${responseJson.Days[i].temp_min_f}&#8457;</p></div>`);
   }
   //remove hidden &display the weather section
   $("#getWeather").removeClass("hidden");
@@ -265,9 +263,9 @@ function displaySportsResults(responseJson) {
   $("#results-getSports").empty();
 
   for (let i = 0; i < responseJson._embedded.events.length; i++) {
-    $("#results-getSports").append(`<li><h3><a href="${
+    $("#results-getSports").append(`<li class="unit"><a href="${
       responseJson._embedded.events[i].url
-    }" target="_blank">${responseJson._embedded.events[i].name}</a></h3>
+    }" target="_blank"><h3>${responseJson._embedded.events[i].name}</h3></a>
     <p>${responseJson._embedded.events[i].dates.start.localDate}</p>
     <img src="${
       responseJson._embedded.events[i].images[0].url
@@ -331,10 +329,11 @@ function displayMusicResults(responseJson) {
     };
     let findSrc = removeHttp(imageSrc);
     */
-
-    $("#results-getMusic").append(`<li><h3><a href="${
+    /*let findDate = `${responseJson._embedded.events[i].dates.start.localDate}`;
+    let readableDate = getDate(findDate);*/
+    $("#results-getMusic").append(`<li class="unit"><a href="${
       responseJson._embedded.events[i].url
-    }" target="_blank">${responseJson._embedded.events[i].name}</a></h3>
+    }" target="_blank"><h3>${responseJson._embedded.events[i].name}</h3></a>
     <p>${responseJson._embedded.events[i].dates.start.localDate}</p>
       <img src="${
         responseJson._embedded.events[i].images[0].url
@@ -391,9 +390,11 @@ function displayPlaysResults(responseJson) {
   $("#results-getPlays").empty();
 
   for (let i = 0; i < responseJson._embedded.events.length; i++) {
-    $("#results-getPlays").append(`<li><h3><a href="${
+    /*let findDate = `${responseJson._embedded.events[i].dates.start.localDate}`;
+    let readableDate = getDate(findDate);*/
+    $("#results-getPlays").append(`<li class="unit"><a href="${
       responseJson._embedded.events[i].url
-    }" target="_blank">${responseJson._embedded.events[i].name}</a></h3>
+    }" target="_blank"><h3>${responseJson._embedded.events[i].name}</h3></a>
       <p>${responseJson._embedded.events[i].dates.start.localDate}</p>
         <img src="${
           responseJson._embedded.events[i].images[0].url
@@ -401,6 +402,18 @@ function displayPlaysResults(responseJson) {
   }
   //remove hidden & display the Events section
   $("#getPlays").removeClass("hidden");
+}
+
+/*=========================
+DATE LABEL SCRIPT
+===========================*/
+function getDate(date) {
+  let nowDate = new Date(parseInt(date.substr(6)));
+  let result = "";
+  result += nowDate.format("m/d/yy");
+  /*result += nowDate.format ("mmm d, yyyy")
+  result += nowDate.format ("mmmm d, yyyy")*/
+  return result;
 }
 
 $(watchForm);
