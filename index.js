@@ -71,6 +71,7 @@ function displayResults(responseJson) {
 
   //remove hidden &display the results section
   //$("#results").removeClass("hidden");
+  //scroll_to_anchor($("#scrollDownResults"));
   $(".Title").removeClass("hidden");
   $(".resultsBox").removeClass("hidden");
   $(".shareSection").removeClass("positionAbsolute");
@@ -95,6 +96,10 @@ function displayResults(responseJson) {
 function consolePrint() {
   console.log(cityLat);
   console.log(cityLong);
+}
+
+function scroll_to_anchor(tag) {
+  $("html,body").animate({ scrollTop: tag.offset().top }, "slow");
 }
 
 /*==============================================================
@@ -205,17 +210,35 @@ function displayWeatherResults(responseJson) {
   console.log(responseJson);
   $("#results-getWeather").empty();
 
-  for (let i = 0; i < responseJson.Days.length; i++) {
+  for (let i = 1; i < responseJson.Days.length; i++) {
+    let apiDate = responseJson.Days[i].date;
+    let day = getWeatherDay(apiDate);
     $("#results-getWeather").append(`<div class="days"><li>
         <img src="https://cssteffen.github.io/Go-Be_Active-API/Images/setgif/${
           responseJson.Days[i].Timeframes[1].wx_icon
-        }"><h4>${responseJson.Days[i].date}</h4>
+        }"><h4>${day}</h4>
         <p>${responseJson.Days[i].Timeframes[1].wx_desc}<br>High: ${
       responseJson.Days[i].temp_max_f
     }&#8457;<br>Low: ${responseJson.Days[i].temp_min_f}&#8457;</p></div>`);
   }
   //remove hidden &display the weather section
   $("#getWeather").removeClass("hidden");
+  scroll_to_anchor($("#scrollDownResults"));
+}
+
+/*=========================
+WEATHER - DATE LABEL SCRIPT
+===========================*/
+function getWeatherDay(date) {
+  let dateArr = date.split("/");
+  let monthPart = dateArr[1];
+  let dayPart = dateArr[0];
+  let yearPart = dateArr[2];
+  dateArr[0] = yearPart;
+  dateArr[1] = monthPart;
+  dateArr[2] = dayPart;
+
+  return moment(dateArr.join("-")).format("dddd"); // ex. Wednesday
 }
 
 /*=========================================================================
@@ -263,10 +286,12 @@ function displaySportsResults(responseJson) {
   $("#results-getSports").empty();
 
   for (let i = 0; i < responseJson._embedded.events.length; i++) {
+    let findDate = `${responseJson._embedded.events[i].dates.start.localDate}`;
+    let readableDate = getDate(findDate);
     $("#results-getSports").append(`<li class="unit"><a href="${
       responseJson._embedded.events[i].url
     }" target="_blank"><h3>${responseJson._embedded.events[i].name}</h3></a>
-    <p>${responseJson._embedded.events[i].dates.start.localDate}</p>
+    <p>${readableDate}</p>
     <img src="${
       responseJson._embedded.events[i].images[0].url
     }" class="apiImage">`);
@@ -329,12 +354,12 @@ function displayMusicResults(responseJson) {
     };
     let findSrc = removeHttp(imageSrc);
     */
-    /*let findDate = `${responseJson._embedded.events[i].dates.start.localDate}`;
-    let readableDate = getDate(findDate);*/
+    let findDate = `${responseJson._embedded.events[i].dates.start.localDate}`;
+    let readableDate = getDate(findDate);
     $("#results-getMusic").append(`<li class="unit"><a href="${
       responseJson._embedded.events[i].url
     }" target="_blank"><h3>${responseJson._embedded.events[i].name}</h3></a>
-    <p>${responseJson._embedded.events[i].dates.start.localDate}</p>
+    <p>${readableDate}</p>
       <img src="${
         responseJson._embedded.events[i].images[0].url
       }" class="apiImage">`);
@@ -390,12 +415,12 @@ function displayPlaysResults(responseJson) {
   $("#results-getPlays").empty();
 
   for (let i = 0; i < responseJson._embedded.events.length; i++) {
-    /*let findDate = `${responseJson._embedded.events[i].dates.start.localDate}`;
-    let readableDate = getDate(findDate);*/
+    let findDate = `${responseJson._embedded.events[i].dates.start.localDate}`;
+    let readableDate = getDate(findDate);
     $("#results-getPlays").append(`<li class="unit"><a href="${
       responseJson._embedded.events[i].url
     }" target="_blank"><h3>${responseJson._embedded.events[i].name}</h3></a>
-      <p>${responseJson._embedded.events[i].dates.start.localDate}</p>
+      <p>${readableDate}</p>
         <img src="${
           responseJson._embedded.events[i].images[0].url
         }" class="apiImage">`);
@@ -408,11 +433,13 @@ function displayPlaysResults(responseJson) {
 DATE LABEL SCRIPT
 ===========================*/
 function getDate(date) {
-  let nowDate = new Date(parseInt(date.substr(6)));
+  let dateFormat = new Date("2019-10-24");
+  new Date(date);
   let result = "";
-  result += nowDate.format("m/d/yy");
-  /*result += nowDate.format ("mmm d, yyyy")
-  result += nowDate.format ("mmmm d, yyyy")*/
+
+  result += moment(date).format("l"); // ex. 7/31/2019
+  //result += moment().format("LL"); // ex. July 31, 2019
+  //result += moment().format("MMM Do YY"); // July 31st 19
   return result;
 }
 
