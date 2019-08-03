@@ -1,4 +1,5 @@
 "use strict";
+
 let cityLat = "";
 let cityLong = "";
 
@@ -444,67 +445,3 @@ function getDate(date) {
 }
 
 $(watchForm);
-
-/*=========================
-CODE SNIPPET from previous News API assignment example
-===========================
-    <img src="${responseJson.events[i]._embedded.events.images[i].url}">
-
-     <img src="${responseJson.Days[i].Timeframes[4].wx_icon}">
- changes 
-
-function getEvents() {
-  const eventsApiKey = "3DAh6jhPsiI5KiAPITc9gcjuXJx5aE9R";
-
-  const eventGeoLocation = cityLat + "," + cityLong;
-
-  const eventsURL = "https://app.ticketmaster.com/discovery/v2/events.json";
-
-  const params = {
-    geoPoint: eventGeoLocation,
-    apikey: eventsApiKey
-  };
-
- function displayEventResults(responseJson) {
-  // if there are previous results, remove them
-  console.log(responseJson);
-  $("#results-getEvents").empty();
-
-  for (let i = 0; i < responseJson._embedded.events.length; i++) {
-    $("#results-getEvents").append(`<li><h3><a href="${
-      responseJson._embedded.events[i].url
-    }" target="_blank">${responseJson._embedded.events[i].name}</a></h3>
-    <p>${responseJson._embedded.events[i].dates.start.localDate}</p>
-      <p>${responseJson._embedded.events[i].info}</p>
-      <img src="${responseJson._embedded.events[i].images.url}">`);
-  }
-
-function getNews(query, maxResults=10) {
-  const params = {
-    q: query,
-    language: "en",
-  };
-  const queryString = formatQueryParams(params)
-  const url = searchURL + '?' + queryString;
-
-  console.log(url);
-
-  const options = {
-    headers: new Headers({
-      "X-Api-Key": apiKey})
-  };
-
-  fetch(url, options)
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(response.statusText);
-    })
-    .then(responseJson => displayResults(responseJson, maxResults))
-    .catch(err => {
-      $('#js-error-message').text(`Something went wrong: ${err.message}`);
-    });
-} 
-
-*/

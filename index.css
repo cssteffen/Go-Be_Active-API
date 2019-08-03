@@ -114,6 +114,10 @@ input[type="text"] {
   width: 90%;
 }
 
+input::placeholder {
+  color: rgb(139, 139, 139);
+}
+
 form a {
   text-decoration: none;
   color: #363b52;
