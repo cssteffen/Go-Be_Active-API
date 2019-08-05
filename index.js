@@ -75,20 +75,19 @@ function displayResults(responseJson) {
   //scroll_to_anchor($("#scrollDownResults"));
   $(".Title").removeClass("hidden");
   $(".resultsBox").removeClass("hidden");
+  $(".sectionBox").removeClass("hidden");
   $(".shareSection").removeClass("positionAbsolute");
 
   cityLat = `${responseJson.results[i].locations[0].displayLatLng.lat}`;
   cityLong = `${responseJson.results[i].locations[0].displayLatLng.lng}`;
 
   //////////CALL REST OF API's/////////////
-  consolePrint();
-  getHikingTrails();
   getWeatherForecast();
   getSports();
   getMusic();
   getPlays();
-  getMusic();
-  getPlays();
+  consolePrint();
+  getHikingTrails();
 
   ////////////////////////////////////////
 }
@@ -99,6 +98,7 @@ function consolePrint() {
   console.log(cityLong);
 }
 
+//scolls to results once loaded when submit button is pushed
 function scroll_to_anchor(tag) {
   $("html,body").animate({ scrollTop: tag.offset().top }, "slow");
 }
@@ -133,9 +133,10 @@ function getHikingTrails() {
     })
     .then(responseJson => displayTrailResults(responseJson))
     .catch(err => {
-      $("#js-error-message2").text(
-        `Something went wrong in the Trails API: ${err.message}`
-      );
+      $("#results-getTrails")
+        .append(`<li class="unit"><h3>Unable to find Trails at this time</h3>
+        <p>Try another city or</p><a href="https://www.alltrails.com/ target="_blank""><button class="sorry-btn">Search All-Trails</button></a>
+`);
     });
 }
 
@@ -155,6 +156,14 @@ function displayTrailResults(responseJson) {
     } mi.</p>
       <p>${responseJson.trails[i].stars} Stars</p>`);
   }
+  if ($("#results-getTrails") === "") {
+    $("results-getTrails").append(
+      `<li class="unit"><h3>No Trails found</h3>
+      <p>Try another city or</p>
+      <a href="https://www.alltrails.com/ target="_blank""><button class="sorry-btn">Search All-Trails</button></a>`
+    );
+  }
+
   //remove hidden &display the trails section
   $("#getTrails").removeClass("hidden");
   cityLat = `${responseJson.results[i].locations[0].displayLatLng.lat}`;
@@ -275,9 +284,10 @@ function getSports() {
     })
     .then(responseJson => displaySportsResults(responseJson))
     .catch(err => {
-      $("#js-error-message4").text(
-        `Something went wrong, Sports API: ${err.message}`
-      );
+      $("#results-getSports")
+        .append(`<li class="unit"><h3>Unable to find Sporting Events at this time</h3>
+        <p>Try another location or</p>
+        <a href="https://www.stubhub.com/" target="_blank"><button class="sorry-btn">Search Stubhub</button></a>`);
     });
 }
 
@@ -296,6 +306,13 @@ function displaySportsResults(responseJson) {
     <img src="${
       responseJson._embedded.events[i].images[0].url
     }" class="apiImage">`);
+  }
+  if (responseJson._embedded.events.length === 0) {
+    $("#results-getSports").append(
+      `<li class="unit"><h3>No Sporting Events found</h3>
+      <p>Try another location or</p>
+      <a href="https://www.stubhub.com/" target="_blank"><button class="sorry-btn">Search StubHub</button></a>`
+    );
   }
   //remove hidden & display the Sports section
   $("#getSports").removeClass("hidden");
@@ -336,9 +353,10 @@ function getMusic() {
     })
     .then(responseJson => displayMusicResults(responseJson))
     .catch(err => {
-      $("#js-error-message5").text(
-        `Something went wrong, Music API: ${err.message}`
-      );
+      $("#results-getMusic")
+        .append(`<li class="unit"><h3>Unable to find Music Events at this time</h3>
+        <p>Try another location or</p>
+        <a href="https://www.stubhub.com/" target="_blank"><button class="sorry-btn">Search Stubhub</button></a>`);
     });
 }
 
@@ -347,26 +365,30 @@ function displayMusicResults(responseJson) {
   console.log(responseJson);
   $("#results-getMusic").empty();
 
-  for (let i = 0; i < responseJson._embedded.events.length; i++) {
-    /*remove https: from image url to display image 
-    let imageSrc = `${responseJson._embedded.events[i].images[0].url}`;
-    let removeHttp = function(imageSrc) {
-      return imageSrc.replace(/^(https?:|)\/\//, "");
-    };
-    let findSrc = removeHttp(imageSrc);
-    */
-    let findDate = `${responseJson._embedded.events[i].dates.start.localDate}`;
-    let readableDate = getDate(findDate);
-    $("#results-getMusic").append(`<li class="unit"><a href="${
-      responseJson._embedded.events[i].url
-    }" target="_blank"><h3>${responseJson._embedded.events[i].name}</h3></a>
+  if (responseJson._embedded.events.length === 0) {
+    $("#results-getMusic").append(
+      `<li class="unit"><h3>No Music Events found</h3>
+<p>Try another location or</p><a href="https://www.stubhub.com/" target="_blank"><button class="sorry-btn">Search StubHub</button></a>
+        `
+    );
+    $("#getMusic").removeClass("hidden");
+  } else {
+    for (let i = 0; i < responseJson._embedded.events.length; i++) {
+      let findDate = `${
+        responseJson._embedded.events[i].dates.start.localDate
+      }`;
+      let readableDate = getDate(findDate);
+      $("#results-getMusic").append(`<li class="unit"><a href="${
+        responseJson._embedded.events[i].url
+      }" target="_blank"><h3>${responseJson._embedded.events[i].name}</h3></a>
     <p>${readableDate}</p>
       <img src="${
         responseJson._embedded.events[i].images[0].url
       }" class="apiImage">`);
+    }
+    //remove hidden & display the Sports section
+    $("#getMusic").removeClass("hidden");
   }
-  //remove hidden & display the Sports section
-  $("#getMusic").removeClass("hidden");
 }
 
 /*=========================================================================
@@ -404,9 +426,10 @@ function getPlays() {
     })
     .then(responseJson => displayPlaysResults(responseJson))
     .catch(err => {
-      $("#js-error-message3").text(
-        `Something went wrong, Plays API: ${err.message}`
-      );
+      $("#results-getPlays")
+        .append(`<li class="unit"><h3>Unable to find Theatre Events at this time</h3>
+        <p>Try another location or</p>
+        <a href="https://www.stubhub.com/" target="_blank"><button class="sorry-btn">Search StubHub</button></a>`);
     });
 }
 
@@ -415,20 +438,39 @@ function displayPlaysResults(responseJson) {
   console.log(responseJson);
   $("#results-getPlays").empty();
 
-  for (let i = 0; i < responseJson._embedded.events.length; i++) {
-    let findDate = `${responseJson._embedded.events[i].dates.start.localDate}`;
-    let readableDate = getDate(findDate);
-    $("#results-getPlays").append(`<li class="unit"><a href="${
-      responseJson._embedded.events[i].url
-    }" target="_blank"><h3>${responseJson._embedded.events[i].name}</h3></a>
+  if (responseJson._embedded.events.length === 0) {
+    $("#results-getPlays")
+      .append(`<li class="unit"><h3>No Theatre Events found</h3>
+<p>Try another location or</p><a href="https://www.stubhub.com/" target="_blank"><button class="sorry-btn">Search StubHub</button></a>
+        `);
+    $("#getPlays").removeClass("hidden");
+  } else {
+    for (let i = 0; i < responseJson._embedded.events.length; i++) {
+      let findDate = `${
+        responseJson._embedded.events[i].dates.start.localDate
+      }`;
+      let readableDate = getDate(findDate);
+      $("#results-getPlays").append(`<li class="unit"><a href="${
+        responseJson._embedded.events[i].url
+      }" target="_blank"><h3>${responseJson._embedded.events[i].name}</h3></a>
       <p>${readableDate}</p>
         <img src="${
           responseJson._embedded.events[i].images[0].url
         }" class="apiImage">`);
+    }
+    //remove hidden & display the Events section
+    $("#getPlays").removeClass("hidden");
   }
-  //remove hidden & display the Events section
-  $("#getPlays").removeClass("hidden");
 }
+/*
+  let resultsList = document.getElementById("results-getPlays").hasChildNodes();
+  if (resultsList == false) {
+    console.log("play resultsList returned FALSE");
+ else if (resultsList == true) {
+    $("#getPlays").removeClass("hidden");
+    console.log("play resultsList returned TRUE");
+  }
+}*/
 
 /*=========================
 DATE LABEL SCRIPT

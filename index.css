@@ -203,6 +203,7 @@ button:hover {
 .sectionBox {
   margin: 0 auto;
   overflow: scroll;
+  min-height: 550px;
 }
 
 .Title {
@@ -269,6 +270,10 @@ h3:hover {
   max-height: 450px;
   margin: 0 auto;
   overflow: scroll;
+}
+
+.sorry-btn {
+  text-transform: uppercase;
 }
 
 /*======= FOOTER =========*/
