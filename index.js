@@ -6,7 +6,6 @@ let cityLong = "";
 function watchForm() {
   $("form").submit(event => {
     event.preventDefault();
-    /*$("#btn").click(function(){*/
     const searchTerm = $("#js-search-term").val();
     $(".js-cityWeather").text(`${searchTerm} Weather`);
 
@@ -88,7 +87,6 @@ function displayResults(responseJson) {
   getPlays();
   consolePrint();
   getHikingTrails();
-
   ////////////////////////////////////////
 }
 
@@ -265,7 +263,6 @@ function getSports() {
     apikey: eventsApiKey,
     radius: 20,
     unit: "miles",
-    /*includeFamily: "yes",*/
     keyword: "sports"
   };
 
@@ -334,7 +331,6 @@ function getMusic() {
     apikey: eventsApiKey,
     radius: "20",
     unit: "miles",
-    /*includeFamily: "yes",*/
     keyword: "music"
   };
 
@@ -462,15 +458,6 @@ function displayPlaysResults(responseJson) {
     $("#getPlays").removeClass("hidden");
   }
 }
-/*
-  let resultsList = document.getElementById("results-getPlays").hasChildNodes();
-  if (resultsList == false) {
-    console.log("play resultsList returned FALSE");
- else if (resultsList == true) {
-    $("#getPlays").removeClass("hidden");
-    console.log("play resultsList returned TRUE");
-  }
-}*/
 
 /*=========================
 DATE LABEL SCRIPT
