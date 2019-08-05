@@ -8,16 +8,20 @@ Go-Be_Active-API</a></h1>
 
 <h2>Screen Schots:</h2>
 
-<h2>Home Screen/Landing Page:</h2>
+<p>Home Screen/Landing Page:</p>
 <img src="https://user-images.githubusercontent.com/30050423/62484557-f76d4400-b7a9-11e9-92c7-23efa5be14f4.png">
 
-<h2>Result Page:</h2>
+<p>Result Page:</p>
 <img src="https://user-images.githubusercontent.com/30050423/62484642-2aafd300-b7aa-11e9-9e47-b8c36b8c6f82.png">
 
 <h2>Summary</h2>
     <p>The user inputs a city and state into the form input.
     Once the form is submitted, the City, State input is converted into geographical points using the MapQuest API.</p><br>
     <p>The returned latitude and longitude points are then used in calling the Hiking Project API, TicketMaster API and WeatherUnlocked API the local weather, trails and events in that location.</p>
+
+<h2>Live Demo</h2>
+<a href = "https://cssteffen.github.io/Go-Be_Active-API/">
+Go-Be_Active-API</a>
 
 <h2>Built with:</h2>
     <p>HTML/CSS/JavaScript/jQuery</p>
